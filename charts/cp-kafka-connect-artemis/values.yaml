@@ -24,8 +24,8 @@ servicePort: 8083
 ## ref: https://docs.confluent.io/current/connect/userguide.html#configuring-workers
 configurationOverrides:
   "plugin.path": "/usr/share/java,/usr/share/confluent-hub-components"
-  "key.converter": "io.confluent.connect.avro.AvroConverter"
-  "value.converter": "io.confluent.connect.avro.AvroConverter"
+  "key.converter": "org.apache.kafka.connect.json.JsonConverter"
+  "value.converter": "org.apache.kafka.connect.json.JsonConverter"
   "key.converter.schemas.enable": "false"
   "value.converter.schemas.enable": "false"
   "internal.key.converter": "org.apache.kafka.connect.json.JsonConverter"
@@ -77,7 +77,7 @@ prometheus:
   ## JMX Exporter Configuration
   ## ref: https://github.com/prometheus/jmx_exporter
   jmx:
-    enabled: true
+    enabled: false
     image: solsson/kafka-prometheus-jmx-exporter@sha256
     imageTag: 6f82e2b0464f50da8104acd7363fb9b995001ddff77d248379f8788e78946143
     imagePullPolicy: IfNotPresent
@@ -90,7 +90,7 @@ prometheus:
 ## You can list load balanced service endpoint, or list of all brokers (which is hard in K8s).  e.g.:
 ## bootstrapServers: "PLAINTEXT://dozing-prawn-kafka-headless:9092"
 kafka:
-  bootstrapServers: ""
+  bootstrapServers: "PLAINTEXT://kafka-cp-kafka-headless:9092"
 
 ## If the Kafka Chart is disabled a URL and port are required to connect
 ## e.g. gnoble-panther-cp-schema-registry:8081

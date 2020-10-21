@@ -75,7 +75,7 @@ spec:
                 fieldRef:
                   fieldPath: status.podIP
             - name: CONNECT_BOOTSTRAP_SERVERS
-              value: {{ template "cp-kafka-connect.kafka.bootstrapServers" . }}
+              value: {{ .Values.kafka.bootstrapServers }}
             - name: CONNECT_GROUP_ID
               value: {{ template "cp-kafka-connect.groupId" . }}
             - name: CONNECT_CONFIG_STORAGE_TOPIC
@@ -102,11 +102,18 @@ spec:
             - name: KAFKA_JMX_PORT
               value: "{{ .Values.jmx.port }}"
             {{- end }}
-        {{- if .Values.customEnv.CUSTOM_SCRIPT_PATH }}
+
           command:
             - /bin/bash
             - -c
             - |
+              cd /usr/share/confluent-hub-components && mkdir artemis-connector
+              cd artemis-connector && mkdir etc && mkdir lib && cd lib
+              wget http://172.16.1.36/ArtemisSource.jar
+              echo \
+              {{ .Files.Get "kafka-connect.properties" | toString | squote | indent 14}} >> /etc/connect-distributed.properties
+              echo \
+              {{ .Files.Get "artemis-source.json" | toString | squote | indent 14}} >> /etc/artemis-source.json
               /etc/confluent/docker/run &
               $CUSTOM_SCRIPT_PATH
               sleep infinity
@@ -114,7 +121,7 @@ spec:
           livenessProbe:
 {{ toYaml .Values.livenessProbe | trim | indent 12 }}
           {{- end }}
-        {{- end }}
+
           {{- if .Values.volumeMounts }}
           volumeMounts:
 {{ toYaml .Values.volumeMounts | indent 10 }}

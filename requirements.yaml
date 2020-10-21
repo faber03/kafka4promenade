@@ -15,10 +15,14 @@ dependencies:
   version: 0.1.0
   repository: file://./charts/cp-kafka-rest
   condition: cp-kafka-rest.enabled
-- name: cp-kafka-connect
+- name: cp-kafka-connect-artemis
   version: 0.1.0
-  repository: file://./charts/cp-kafka-connect
-  condition: cp-kafka-connect.enabled
+  repository: file://./charts/cp-kafka-connect-artemis
+  condition: cp-kafka-connect-artemis.enabled
+- name: cp-kafka-connect-neo4j
+  version: 0.1.0
+  repository: file://./charts/cp-kafka-connect-neo4j
+  condition: cp-kafka-connect-neo4j.enabled
 - name: cp-ksql-server
   version: 0.1.0
   repository: file://./charts/cp-ksql-server

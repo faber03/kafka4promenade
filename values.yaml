@@ -65,7 +65,7 @@ cp-kafka:
 ## Schema Registry
 ## ------------------------------------------------------
 cp-schema-registry:
-  enabled: true
+  enabled: false
   image: confluentinc/cp-schema-registry
   imageTag: 5.5.0
   ## Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace.
@@ -87,7 +87,7 @@ cp-schema-registry:
 ## REST Proxy
 ## ------------------------------------------------------
 cp-kafka-rest:
-  enabled: true
+  enabled: false
   image: confluentinc/cp-kafka-rest
   imageTag: 5.5.0
   ## Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace.
@@ -108,8 +108,27 @@ cp-kafka-rest:
 ## ------------------------------------------------------
 ## Kafka Connect
 ## ------------------------------------------------------
-cp-kafka-connect:
-  enabled: true
+cp-kafka-connect-artemis:
+  enabled: false
+  image: confluentinc/cp-kafka-connect
+  imageTag: 5.5.0
+  ## Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace.
+  ## https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod
+  imagePullSecrets:
+  #  - name: "regcred"
+  heapOptions: "-Xms512M -Xmx512M"
+  resources: {}
+  ## If you do want to specify resources, uncomment the following lines, adjust them as necessary,
+  ## and remove the curly braces after 'resources:'
+  #  limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  #  requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+cp-kafka-connect-neo4j:
+  enabled: false
   image: confluentinc/cp-kafka-connect
   imageTag: 5.5.0
   ## Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace.
@@ -131,7 +150,7 @@ cp-kafka-connect:
 ## KSQL Server
 ## ------------------------------------------------------
 cp-ksql-server:
-  enabled: true
+  enabled: false
   image: confluentinc/cp-ksqldb-server
   imageTag: 5.5.0
   ## Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace.
