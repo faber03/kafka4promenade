@@ -107,11 +107,11 @@ spec:
             - /bin/bash
             - -c
             - |
-              confluent-hub install --no-prompt neo4j/kafka-connect-neo4j:1.0.7
-              cd /usr/share/confluent-hub-components/neo4j-kafka-connect-neo4j/lib && rm kotlin-reflect-1.2.51.jar
-              wget https://github.com/Samuele-Paglia/ASSD_project/raw/master/libs/kotlin-reflect-1.3.72.jar
+              confluent-hub install --no-prompt mongodb/kafka-connect-mongodb:1.4.0
               echo \
               {{ .Files.Get "kafka-connect.properties" | toString | squote | indent 14}} >> /etc/connect-distributed.properties
+              echo \
+              {{ .Files.Get "artemis-source.json" | toString | squote | indent 14}} >> /etc/artemis-source.json
               /etc/confluent/docker/run &
               $CUSTOM_SCRIPT_PATH
               sleep infinity

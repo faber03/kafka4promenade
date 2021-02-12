@@ -23,6 +23,10 @@ dependencies:
   version: 0.1.0
   repository: file://./charts/cp-kafka-connect-neo4j
   condition: cp-kafka-connect-neo4j.enabled
+- name: cp-kafka-connect-mongodb
+  version: 0.1.0
+  repository: file://./charts/cp-kafka-connect-mongodb
+  condition: cp-kafka-connect-mongodb.enabled
 - name: cp-ksql-server
   version: 0.1.0
   repository: file://./charts/cp-ksql-server
