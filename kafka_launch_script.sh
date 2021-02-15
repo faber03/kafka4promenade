@@ -12,21 +12,20 @@ oc delete pvc datalogdir-kafka-cp-zookeeper-0
 oc delete pvc datalogdir-kafka-cp-zookeeper-1
 oc delete pvc datalogdir-kafka-cp-zookeeper-2
 
-helm del --purge kafka
+helm3 delete kafka
 
-helm del --purge kafka-connect-artemis
+helm3 delete kafka-connect-artemis
 
-helm del --purge kafka-connect-neo4j
+helm3 delete kafka-connect-neo4j
 
-
-helm install --name kafka .
+helm3 install kafka .
 
 cd charts/cp-kafka-connect-artemis || exit
 
 sleep 100
 
-helm install --name kafka-connect-artemis .
+helm3 install kafka-connect-artemis .
 
 cd ~/Desktop/Promenade/cp-kafka-helm-charts/charts/cp-kafka-connect-neo4j/ || exit
 
-helm install --name kafka-connect-neo4j .
+helm3 install kafka-connect-neo4j .
