@@ -62,7 +62,7 @@ persistence:
 
   ## The size of the PersistentVolume to allocate to each Kafka Pod in the StatefulSet. For
   ## production servers this number should likely be much larger.
-  size: 1Gi
+  size: 8Gi #this should be set big enough to avid "no space left on device" problem
 
   ## Kafka data Persistent Volume Storage Class
   ## If defined, storageClassName: <storageClass>
@@ -138,8 +138,8 @@ cp-zookeeper:
   servers: 3
   persistence:
     enabled: true
-    dataDirSize: 5Gi
-    dataLogDirSize: 5Gi
+    dataDirSize: 8Gi #this should be set big enough to avid "no space left on device" problem
+    dataLogDirSize: 8Gi #this should be set big enough to avid "no space left on device" problem
 
   ## If the Zookeeper Chart is disabled a URL and port are required to connect
   url: ""
